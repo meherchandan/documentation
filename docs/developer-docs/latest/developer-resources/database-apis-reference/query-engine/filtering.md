@@ -88,7 +88,7 @@ const entries = await strapi.db.query('api::article.article').findMany({
 
 - as a logical operator (e.g. in `where: { $not: { // conditions… }}`)
 - or [as an attribute operator](#not-2) (e.g. in `where: { attribute-name: $not: { … } }`).
-:::
+  :::
 
 :::tip
 `$and`, `$or` and `$not` operators are nestable inside of another `$and`, `$or` or `$not` operator.
@@ -140,6 +140,22 @@ const entries = await strapi.db.query('api::article.article').findMany({
 const entries = await strapi.db.query('api::article.article').findMany({
   where: {
     title: 'Hello World',
+  },
+});
+```
+
+### `$eqsi`
+
+Attribute equals input value(case insensitive).
+
+**Example**
+
+```js
+const entries = await strapi.db.query('api::article.article').findMany({
+  where: {
+    title: {
+      $eqsi: 'HELLO World',
+    },
   },
 });
 ```
@@ -282,7 +298,6 @@ const entries = await strapi.db.query('api::article.article').findMany({
 });
 ```
 
-
 ### `$contains`
 
 Attribute contains the input value (case-sensitive).
@@ -298,7 +313,6 @@ const entries = await strapi.db.query('api::article.article').findMany({
   },
 });
 ```
-
 
 ### `$notContains`
 
