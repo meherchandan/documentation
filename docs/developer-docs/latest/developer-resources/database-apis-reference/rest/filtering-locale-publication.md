@@ -51,8 +51,7 @@ The following operators are available:
 
 ```js
 const qs = require('qs');
-const query = qs.stringify(
-  {
+const query = qs.stringify({
     filters: {
       username: {
         $eq: 'John',
@@ -61,8 +60,7 @@ const query = qs.stringify(
   },
   {
     encodeValuesOnly: true,
-  }
-);
+  });
 
 await request(`/api/users?${query}`);
 // GET /api/users?filters[username][$eq]=John
@@ -97,8 +95,7 @@ await request(`/api/users?${query}`);
 
 ```js
 const qs = require('qs');
-const query = qs.stringify(
-  {
+const query = qs.stringify({
     filters: {
       id: {
         $in: [3, 6, 8],
@@ -107,8 +104,7 @@ const query = qs.stringify(
   },
   {
     encodeValuesOnly: true, // prettify url
-  }
-);
+  });
 
 await request(`/api/restaurants?${query}`);
 // GET /api/restaurants?filters[id][$in][0]=3&filters[id][$in][1]=6&filters[id][$in][2]=8
@@ -124,21 +120,21 @@ await request(`/api/restaurants?${query}`);
     {
       "id": 3,
       "attributes": {
-        "name": "test3"
+        "name": "test3",
         // ...
       }
     },
     {
       "id": 6,
       "attributes": {
-        "name": "test6"
+        "name": "test6",
         // ...
       }
     },
     {
       "id": 8,
       "attributes": {
-        "name": "test8"
+        "name": "test8",
         // ...
       }
     }
@@ -165,8 +161,7 @@ Complex filtering is combining multiple filters utilizing advanced methods such 
 
 ```js
 const qs = require('qs');
-const query = qs.stringify(
-  {
+const query = qs.stringify({
     filters: {
       $or: [
         {
@@ -189,8 +184,7 @@ const query = qs.stringify(
   },
   {
     encodeValuesOnly: true,
-  }
-);
+  });
 
 await request(`/api/books?${query}`);
 // GET /api/books?filters[$or][0][date][$eq]=2020-01-01&filters[$or][1][date][$eq]=2020-01-02&filters[author][name][$eq]=Kai%20doe
@@ -207,7 +201,7 @@ await request(`/api/books?${query}`);
       "id": 1,
       "attributes": {
         "name": "test1",
-        "date": "2020-01-01"
+        "date": "2020-01-01",
         // ...
       }
     },
@@ -215,7 +209,7 @@ await request(`/api/books?${query}`);
       "id": 2,
       "attributes": {
         "name": "test2",
-        "date": "2020-01-02"
+        "date": "2020-01-02",
         // ...
       }
     }
@@ -238,8 +232,7 @@ Deep filtering is filtering on a relation's fields.
 
 ```js
 const qs = require('qs');
-const query = qs.stringify(
-  {
+const query = qs.stringify({
     filters: {
       chef: {
         restaurants: {
@@ -252,8 +245,7 @@ const query = qs.stringify(
   },
   {
     encodeValuesOnly: true,
-  }
-);
+  });
 
 await request(`/api/restaurants?${query}`);
 // GET /api/restaurants?filters[chef][restaurants][stars][$eq]=5
@@ -312,7 +304,7 @@ await request(`/api/restaurants?${query}`);
 
 - The [Internationalization (i18n) plugin](/developer-docs/latest/plugins/i18n.md) should be installed.
 - [Localization should be enabled for the content-type](/user-docs/latest/content-types-builder/creating-new-content-type.md#creating-a-new-content-type).
-  :::
+:::
 
 The `locale` API parameter can be used to [get entries from a specific locale](/developer-docs/latest/plugins/i18n.md#getting-localized-entries-with-the-locale-parameter).
 
@@ -332,14 +324,12 @@ Queries can accept a `publicationState` parameter to fetch entries based on thei
 
 ```js
 const qs = require('qs');
-const query = qs.stringify(
-  {
+const query = qs.stringify({
     publicationState: 'preview',
   },
   {
     encodeValuesOnly: true,
-  }
-);
+  });
 
 await request(`/api/articles?${query}`);
 // GET /api/articles?publicationState=preview
